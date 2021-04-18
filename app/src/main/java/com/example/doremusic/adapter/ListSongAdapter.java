@@ -66,8 +66,10 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.Adapte
 
         public AdapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtName = itemView.findViewById(R.id.txt_card_name);
             txtAuthor = itemView.findViewById(R.id.txt_card_author);
+            txtName = itemView.findViewById(R.id.txt_card_name);
+
+
 
             itemView.setOnClickListener(this);
         }
