@@ -1,4 +1,4 @@
-package com.example.doremusic.adapter;
+package com.example.doremusic.adapter.adapter_interface;
 
 import android.view.View;
 

@@ -29,18 +29,18 @@ public class ControlFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_control, container,false);
+        rootView = inflater.inflate(R.layout.fragment_control, container, false);
         initData();
         initView();
         initAction();
         return rootView;
     }
 
-    public void initData(){
+    public void initData() {
         song = (Song) getArguments().getSerializable("song");
     }
 
-    public void initView(){
+    public void initView() {
         btnNext = rootView.findViewById(R.id.btn_next_control);
         btnPlay = rootView.findViewById(R.id.btn_play_pause_control);
         btnPrev = rootView.findViewById(R.id.btn_prev_control);
@@ -49,7 +49,8 @@ public class ControlFragment extends Fragment {
         txtAuthor = rootView.findViewById(R.id.txt_author_control);
 
     }
-    public void initAction(){
+
+    public void initAction() {
         txtName.setText(song.getName());
         txtAuthor.setText(song.getAuthor());
 

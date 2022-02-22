@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doremusic.R;
 import com.example.doremusic.adapter.ListSongAdapter;
-import com.example.doremusic.adapter.OnSongClick;
+import com.example.doremusic.adapter.adapter_interface.OnSongClick;
 
 import static com.example.doremusic.ui.activity.BeginActivity.listSong;
 
@@ -26,15 +26,18 @@ public class ListSongFragment extends Fragment {
 
     private OnSongClick onSongClick;
 
+    private ViewGroup viewGroup;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_list_song,container, false);
+        rootView = inflater.inflate(R.layout.fragment_list_song, container, false);
+        viewGroup = container;
         setAdapter();
         return rootView;
     }
 
-    private void setAdapter(){
+    private void setAdapter() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.scrollToPosition(0);
 
@@ -42,6 +45,7 @@ public class ListSongFragment extends Fragment {
         RecyclerView recyclerView = rootView.findViewById(R.id.recycle_view_container);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(listSongAdapter);
+
 
         listSongAdapter.setOnSongClick(new OnSongClick() {
             @Override
@@ -52,7 +56,7 @@ public class ListSongFragment extends Fragment {
 
     }
 
-    public void setOnSongClick(OnSongClick onSongClick){
+    public void setOnSongClick(OnSongClick onSongClick) {
         this.onSongClick = onSongClick;
     }
 }

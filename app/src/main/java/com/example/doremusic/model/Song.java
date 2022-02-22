@@ -13,7 +13,7 @@ public class Song implements Serializable {
     private int time;
     private int size;
 
-    public Song(String path, String name, String author, int time, int size){
+    public Song(String path, String name, String author, int time, int size) {
         this.name = name;
         this.path = path;
         this.author = author;
@@ -21,7 +21,8 @@ public class Song implements Serializable {
         this.size = size;
 
     }
-    public Song(String path, String name, String author, int time){
+
+    public Song(String path, String name, String author, int time) {
         this.name = name;
         this.path = path;
         this.author = author;

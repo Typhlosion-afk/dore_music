@@ -1,0 +1,82 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <RelativeLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/image"
+            android:src="@drawable/logo_app_small"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/action_quit"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="2dp"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:id="@+id/media_titles"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/image"
+            android:layout_toStartOf="@id/action_quit"
+            android:minHeight="@dimen/notification_large_icon_height"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:text="@string/app_name"
+                android:textSize="10sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:id="@+id/noti_name_song"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="-1dp"
+                android:layout_marginTop="-1dp"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/noti_author"
+                android:layout_width="match_parent"
+                android:textSize="7sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true"
+                tools:ignore="SmallSp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</FrameLayout>

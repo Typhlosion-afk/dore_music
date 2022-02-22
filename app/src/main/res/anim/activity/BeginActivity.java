@@ -47,6 +47,8 @@ public class BeginActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+//        BackgroundRunner backgroundRunner = new BackgroundRunner();
+//        backgroundRunner.execute();
 
         super.onStart();
     }

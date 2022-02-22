@@ -3,8 +3,6 @@ package com.example.doremusic.ui.activity;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -13,10 +11,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Messenger;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import com.example.doremusic.R;
 import com.example.doremusic.adapter.adapter_interface.OnSongClick;
@@ -36,6 +34,8 @@ import static com.example.doremusic.ui.activity.BeginActivity.listSong;
 
 @RequiresApi(api = Build.VERSION_CODES.R)
 public class MainActivity extends AppCompatActivity {
+
+    private Messenger mMessenger;
 
     private MusicService musicService;
 
@@ -59,12 +59,13 @@ public class MainActivity extends AppCompatActivity {
 
     public UpdateSeekBar onSeekBarChange;
 
-    private PlayFragment playFragment;
+    private UpdateSeeBarThread updateSeeBarThread;
 
-    private BroadcastReceiver broadcastReceiver;
+    PlayFragment playFragment;
 
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
+    private Boolean isStart = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d(">>>>>", "onServiceConnected: Service is started");
 
+                mMessenger = new Messenger(service);
+
                 MusicService.MusicBinder musicBinder = (MusicService.MusicBinder) service;
                 musicService = musicBinder.getService();
+                musicService.setSongList(listSong);
                 musicService.setOnMediaDone(new OnMediaDone() {
                     @Override
                     public void onDone() {
@@ -119,8 +123,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onStart();
     }
-
-
 
 
     private void setListSongFragment() {
@@ -166,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         b.putInt("song_pos", pos);
         playFragment.setArguments(b);
 
-        UpdateSeeBarThread updateSeeBarThread = new UpdateSeeBarThread();
+        updateSeeBarThread = new UpdateSeeBarThread();
         updateSeeBarThread.run();
 
         getSupportFragmentManager()
@@ -212,19 +214,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doOnNext() {
-        musicService.nextSong();
+        if (songPos == listSong.size() - 1) {
+            songPos = 0;
+        } else {
+            songPos++;
+        }
+        musicService.setSongPos(songPos);
+        musicService.playSong();
 
     }
 
     private void doOnPrev() {
+        if (songPos == 0) {
+            songPos = listSong.size() - 1;
+        } else {
+            songPos--;
+        }
+        musicService.setSongPos(songPos);
         musicService.playSong();
     }
 
     @Override
     protected void onDestroy() {
         if (!musicService.isMediaPlaying()) {
-            musicService.stop();
+            musicService.stopSelf();
             musicService.stopForeground(true);
+
+            isBound = false;
         }
         super.onDestroy();
     }
@@ -233,14 +249,16 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            if (playFragment != null) {
-                playFragment.updateUi(musicService.getPlayingSong(), musicService.isMediaPlaying());
+            if (playFragment != null && isBound) {
+                playFragment.updateUi(listSong.get(songPos), musicService.isMediaPlaying());
                 int dur = listSong.get(songPos).getTime();
                 int currentPosition = musicService.getCurPos();
                 playFragment.updateSeekBar(currentPosition, dur);
             }
             handler.postDelayed(this, 150);
         }
+
     }
+
 
 }

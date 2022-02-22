@@ -1,29 +1,22 @@
 package com.example.doremusic.adapter;
 
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doremusic.R;
+import com.example.doremusic.adapter.adapter_interface.OnSongClick;
 import com.example.doremusic.model.Song;
-import com.example.doremusic.ui.activity.MainActivity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.AdapterViewHolder> {
@@ -34,7 +27,7 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.Adapte
 
     public OnSongClick mOnSongClick;
 
-    public ListSongAdapter(ArrayList<Song> ls, Context context){
+    public ListSongAdapter(ArrayList<Song> ls, Context context) {
         mListSong.addAll(ls);
         this.context = context;
     }
@@ -60,17 +53,19 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.Adapte
         return mListSong.size();
     }
 
-    class AdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class AdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView txtName, txtAuthor;
+        CardView cardView;
 
         public AdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             txtAuthor = itemView.findViewById(R.id.txt_card_author);
             txtName = itemView.findViewById(R.id.txt_card_name);
+            cardView = itemView.findViewById(R.id.card_list);
 
-
-
+            cardView.setCardBackgroundColor(Color.TRANSPARENT);
+            cardView.setElevation(0);
             itemView.setOnClickListener(this);
         }
 

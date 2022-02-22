@@ -12,35 +12,20 @@
 
         <ImageView
             android:id="@+id/image"
+            android:padding="5dp"
             android:src="@drawable/logo_app_small"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription" />
-
-        <ImageButton android:id="@+id/action_quit"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="2dp"
-            android:padding="6dp"
-            android:scaleType="fitCenter"
-            tools:ignore="ContentDescription" />
-
         <LinearLayout
             android:id="@+id/media_titles"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_toEndOf="@id/image"
-            android:layout_toLeftOf="@id/action_quit"
-            android:layout_toRightOf="@id/image"
-            android:layout_toStartOf="@id/action_quit"
             android:minHeight="@dimen/notification_large_icon_height"
             android:orientation="vertical">
 
@@ -51,28 +36,37 @@
                 android:layout_weight="1"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"
-                android:singleLine="true"/>
+                android:textColor="@color/NearlyWhite"
+                android:singleLine="true"
+                android:text="@string/app_name"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
 
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/noti_name_song"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="-1dp"
                 android:layout_marginTop="-1dp"
+                android:layout_marginBottom="-1dp"
                 android:layout_weight="1"
+                android:textColor="@color/FlatWhite"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/text2"
+                android:id="@+id/noti_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:textColor="@color/NearlyWhite"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
         </LinearLayout>
 
         <LinearLayout
@@ -83,16 +77,15 @@
             android:layout_marginEnd="12dp"
             android:layout_marginStart="12dp"
             android:layout_toEndOf="@id/image"
-            android:layout_toRightOf="@id/image"
             android:layoutDirection="ltr"
             android:orientation="horizontal"
+            android:weightSum="4"
             tools:ignore="UnusedAttribute">
             <!-- media buttons will be added here -->
             <ImageButton
                 android:id="@+id/noti_prev"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="48dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
@@ -100,13 +93,14 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_skip_previous_24"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/noti_play_pause"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="48dp"
+                android:layout_width="0dp"
+                android:src="@drawable/ic_baseline_pause_24"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
@@ -118,9 +112,23 @@
 
             <ImageButton
                 android:id="@+id/noti_next"
+                android:src="@drawable/ic_baseline_skip_next_24"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="48dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/noti_end"
+                android:src="@drawable/ic_baseline_close_24"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"

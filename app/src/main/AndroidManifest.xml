@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DoreMusic">
-        <service android:name=".service.MusicService"/>
-        <activity android:name=".ui.activity.MainActivity"></activity>
+        <receiver
+            android:name=".broadcast.MusicBroadcast"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name = "com.example.doremusic.broadcast.NOTIFICATION_ACTION"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".service.MusicService" />
+
+        <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.BeginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
